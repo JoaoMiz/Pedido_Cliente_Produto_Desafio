@@ -33,6 +33,7 @@ public class PedidoService {
         return pedidoRepository.findById(id);
     }
 
+    //Buscar entidades antes de fazer a persistencia, pra aparecer nome valor etc
     public Pedido salvar(Pedido pedido) {
 
         Cliente cliente = clienteRepository.findById(pedido.getCliente().getId())
