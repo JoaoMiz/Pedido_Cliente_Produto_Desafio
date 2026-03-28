@@ -1,4 +1,4 @@
-package xped.desafio.Controller;
+package xped.desafio.controller;
 
 import xped.desafio.model.Cliente;
 import xped.desafio.service.ClienteService;
