@@ -1,10 +1,14 @@
 package xped.desafio.service;
 
+import xped.desafio.model.Cliente;
 import xped.desafio.model.Pedido;
+import xped.desafio.model.Produto;
+import xped.desafio.repository.ClienteRepository;
 import xped.desafio.repository.PedidoRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import xped.desafio.repository.ProdutoRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,6 +19,12 @@ public class PedidoService {
     @Autowired
     private PedidoRepository pedidoRepository;
 
+    @Autowired
+    private ClienteRepository clienteRepository;
+
+    @Autowired
+    private ProdutoRepository produtoRepository;
+
     public List<Pedido> listarTodos() {
         return pedidoRepository.findAll();
     }
@@ -24,6 +34,17 @@ public class PedidoService {
     }
 
     public Pedido salvar(Pedido pedido) {
+
+        Cliente cliente = clienteRepository.findById(pedido.getCliente().getId())
+                .orElseThrow();
+
+        List<Produto> produtos = pedido.getProdutos().stream()
+                .map(p -> produtoRepository.findById(p.getId()).orElseThrow())
+                .toList();
+
+        pedido.setCliente(cliente);
+        pedido.setProdutos(produtos);
+
         return pedidoRepository.save(pedido);
     }
 
