@@ -1,5 +1,10 @@
 Desafio
 
+H2 URL jdbc:h2:mem:desafiodb
+USERNAME: sa
+SENHA:
+
+---------------------------------------------------------------------------------------
 Estrutura de pastas 
 
 src/main/java/xped/desafio
